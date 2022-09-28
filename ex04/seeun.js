@@ -1,19 +1,24 @@
-function solution(fees, records) {
-  const parkTime = {};
-  records.forEach((r) => {
-    let [time, num, type] = r.split(" ");
-    let [h, m] = time.split(":");
-    time = h * 60 + m * 1;
-    if (!parkTime[num]) parkTime[num] = 0;
-    if (type === "IN") parkTime[num] += 1439 - time; // 23:59 => 1439
-    if (type === "OUT") parkTime[num] -= 1439 - time;
-  });
-
-  let answer = [];
-  for (let [car, time] of Object.entries(parkTime)) {
-    if (time <= fees[0]) time = fees[1];
-    else time = Math.ceil((time - fees[0]) / fees[2]) * fees[3] + fees[1];
-    answer.push([car, time]);
+// 문제 번호 헷갈림...
+function solution(n, k) {
+  let answer = 0;
+  let arr = [];
+  while (n) {
+    arr.push(String(n % k));
+    n = parseInt(n / k);
   }
-  return answer.sort((a, b) => a[0] - b[0]).map((v) => v[1]);
+  arr = arr.reverse().join("").split("0");
+  console.log(arr);
+
+  const isPrime = (n) => {
+    if (n === 1) return false;
+    for (let i = 2; i <= parseInt(Math.sqrt(n)); i++) {
+      if (n % i === 0) return false;
+    }
+    return true;
+  };
+
+  for (let k of arr) {
+    if (k !== "" && isPrime(Number(k))) answer++;
+  }
+  return answer;
 }
