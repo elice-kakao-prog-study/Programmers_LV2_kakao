@@ -3,9 +3,9 @@
 function solution(s) {
   let filtered = s.slice(2, -2).split('},{').map(x => x.split(',').map(Number)).sort((a, b) => a.length - b.length)
 
-  if (filtered.length <= 1) {
-    return filtered[0];
-  }
+  // if (filtered.length <= 1) {
+  //   return filtered[0];
+  // }
 
 
   // filtered = [].concat(...filtered) // 제일 빠름
@@ -20,11 +20,14 @@ function solution(s) {
   // filtered = new Set(filtered.flatMap(x => x))
   // return new Array(...filtered)
 
-  return Array(...(new Set(filtered)));
+  // return Array(...(new Set(filtered)));
+  // return new Array(...(new Set(filtered)));
+  return [...(new Set(filtered))]
 }
+console.log(new Array(...(new Set([1, 2]))))
+console.log(new Array(...(new Set([1]))))
 
-
-console.log(solution('{{4,2,3},{3},{2,3,4,1},{2,3}}'))
+console.log(solution('{{123}}'))
 
 
 
