@@ -17,31 +17,40 @@ function solution(m, n, board) {
         }
       }
     }
+    console.log(block_idx);
 
     // 부셔질 블럭의 값들을 0으로 바꿔준다.
-    for (let i = 0; i < arr.length; i++) {
-      const col = arr[i][0];
-      const row = arr[i][1];
+
+    for (let i = 0; i < block_idx.length; i++) {
+      const col = block_idx[i][0];
+      const row = block_idx[i][1];
       board[col][row] = 0;
       board[col + 1][row] = 0;
       board[col][row + 1] = 0;
       board[col + 1][row + 1] = 0;
     }
 
-    // 부셔지고 남은 블럭들의 인덱스들을 옮겨준다.
-    for (let i = m - 1; i > 0; i--) {
-      if (!board[i].some((v) => !v)) continue;
-
+    console.log(board);
+    // 0들을 없애고 블록들을 아래로 내려야한다... 즉 0인거랑 아닌거랑 바꿔준다..
+    for (let i = m - 1; i >= 0; i--) {
+      // 밑에서 위로 올라가면서
       for (let j = 0; j < n; j++) {
-        for (let k = i - 1; k >= 0 && !board[i][j]; k--) {
-          if (board[k][j]) {
-            board[i][j] = board[k][j];
-            board[k][j] = 0;
-            break;
+        // 0을 찾으면 해당 열에서 찾는다.
+        for (let k = i - 1; k >= 0; k--) {
+          if (!board[i][j]) {
+            if (board[k][j]) {
+              board[i][j] = board[k][j]; // 교환 해줌
+              board[k][j] = 0;
+              break;
+            }
           }
         }
       }
     }
-    if (!arr.length) return [].concat(...board).filter((v) => !v).length;
+
+    // 없애야할 블록이 있으면 보드안에 있는 0들을 세주면 된다.
+    if (!block_idx.length) return board.flat().filter((v) => !v).length;
   }
 }
+
+console.log(solution(4, 5, ["CCBDE", "AAADE", "AAABF", "CCBBF"]));
