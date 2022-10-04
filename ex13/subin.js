@@ -1,3 +1,10 @@
+/*- input 3~100개의 문자열>  배열의 반복문돌리는것은 시간복잡도가 크게 증가하지 않는다고 판단
+- 연산자 우선순위 경우의수 6가지이므로 > 이 우선순위에 따라 완탐하는 문제임.
+- arr를 직접 건들때 >> 배열에서 splice할때 for문말고 while문을 사용해서 
+lastIdx와 curIdx값을 Index Error발생하지 않도록 제어해줘야함.
+*/
+
+
 function solution(expression) {
     const regex = /\d{1,3}|[*+-]/g
     const parsed = expression.match(regex);
