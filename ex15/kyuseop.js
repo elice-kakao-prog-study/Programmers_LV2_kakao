@@ -12,45 +12,31 @@ function solution(places) {
       const nx = x + dx[i];
       const ny = y + dy[i];
       if (nx >= 0 && nx < 5 && ny >= 0 && ny < 5) {
-        if ((i === 0 || i === 2 || i === 4 || i === 6)
-          && place[nx][ny] === 'P') {
+        if (
+          (i === 0 || i === 2 || i === 4 || i === 6)
+          && place[nx][ny] === 'P'
+        ) {
           isOkay = false;
           break;
         }
-        else if ((i === 0 || i === 2 || i === 4 || i === 6)
-          && place[nx][ny] === 'O') {
-          if (i === 0 && place[nx][ny - 1] === 'P') {
+        else if (place[nx][ny] === 'O') {
+          if (
+            (i === 0 && place[nx][ny - 1] === 'P') ||
+            (i === 2 && place[nx - 1] && place[nx - 1][ny] === 'P') ||
+            (i === 4 && place[nx][ny + 1] === 'P') ||
+            (i === 6 && place[nx + 1] && place[nx + 1][ny] === 'P')
+          ) {
             isOkay = false;
             break;
           }
-          if (i === 2 && place[nx - 1] && place[nx - 1][ny] === 'P') {
-            isOkay = false;
-            break;
-          }
-          if (i === 4 && place[nx][ny + 1] === 'P') {
-            isOkay = false;
-            break;
-          }
-          if (i === 6 && place[nx + 1] && place[nx + 1][ny] === 'P') {
-            isOkay = false;
-            break;
-          }
-
         }
-        else if ((i === 1 || i === 3 || i === 5 || i === 7) && place[nx][ny] === 'P') {
-          if (i === 1 && (place[nx + 1][ny] !== 'X' || place[nx][ny + 1] !== 'X')) {
-            isOkay = false;
-            break;
-          }
-          if (i === 3 && (place[nx][ny - 1] !== 'X' || place[nx + 1][ny] !== 'X')) {
-            isOkay = false;
-            break;
-          }
-          if (i === 5 && (place[nx - 1][ny] !== 'X' || place[nx][ny - 1] !== 'X')) {
-            isOkay = false;
-            break;
-          }
-          if (i === 7 && (place[nx][ny + 1] !== 'X' || place[nx - 1][ny] !== 'X')) {
+        else if (place[nx][ny] === 'P') {
+          if (
+            (i === 1 && (place[nx + 1][ny] !== 'X' || place[nx][ny + 1] !== 'X')) ||
+            (i === 3 && (place[nx][ny - 1] !== 'X' || place[nx + 1][ny] !== 'X')) ||
+            (i === 5 && (place[nx - 1][ny] !== 'X' || place[nx][ny - 1] !== 'X')) ||
+            (i === 7 && (place[nx][ny + 1] !== 'X' || place[nx - 1][ny] !== 'X'))
+          ) {
             isOkay = false;
             break;
           }
