@@ -26,9 +26,7 @@ const boardCheckFilter = (board) => {
   };
   
   // # 문자열 붙은 요소를 제거
-  const boardFiltered = boardChecked.map((row) => {
-    return row.filter((el) => !el.includes('#'));
-  });
+  const boardFiltered = boardChecked.map((row) => row.filter((el) => !el.includes('#')));
 
   // 매개변수 배열과 필터링된 배열의 요소 개수가 같으면 더이상 필터링이 안된 것이므로 배열을 리턴하고, 다르면 재귀함수 실행
   return elementCnt(board) === elementCnt(boardFiltered) ? boardFiltered : boardCheckFilter(boardFiltered);
