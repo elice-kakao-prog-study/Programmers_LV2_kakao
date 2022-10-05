@@ -61,3 +61,17 @@ function solution(m, musicinfos) {
 }
 
 solution("ABCDEFG", ["12:00,12:14,HELLO,CDEFGAB"])
+
+// replace('정규표현식/g', callback가능) map처럼
+
+// function removeSarp(str){
+//   const newStr = str.replace(/[A-Z]#/g, x=>x[0].toLowerCase());
+//   return newStr;
+// } //샾없애는 함수 replace두번째 인자값으로 문자열을 return하는 함수가능함.
+
+// m = m
+//     .replace(/(C#)/g, "c")
+//     .replace(/(D#)/g, "d")
+//     .replace(/(F#)/g, "f")
+//     .replace(/(G#)/g, "g")
+//     .replace(/(A#)/g, "a");
