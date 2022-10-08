@@ -14,6 +14,9 @@ function binarySearch(arr, num) {
 
 }
 
+// Number보다 ParseInt가 숫자 변환 더 빠름.
+
+// 테스트 케이스 제일 빠름
 function solution(info, query) {
 
   const infos = {};
@@ -21,16 +24,16 @@ function solution(info, query) {
   info.forEach(data => {
     const [lang, field, career, food, score] = data.split(" ");
     const key = lang + field + career + food;
-    infos[key] ? infos[key].push(score) : infos[key] = [score];
+    infos[key] ? infos[key].push(parseInt(score)) : infos[key] = [parseInt(score)];
   })
 
-  Object.values(infos).forEach(value => value.sort((a, b) => a - b).map(Number))
+  Object.values(infos).forEach(value => value.sort((a, b) => a - b))
 
   const querys = [];
 
   query.forEach(data => {
     const [lang, field, career, food, score] = data.split(/\sand\s|\s/);
-    querys.push({ lang, field, career, food, score })
+    querys.push({ lang, field, career, food, score: parseInt(score) })
   })
 
   const answer = [];
@@ -46,8 +49,8 @@ function solution(info, query) {
         (c3 === '-' || key.includes(c3)) &&
         (c4 === '-' || key.includes(c4))
       ) {
-        const idx = binarySearch(infos[key], Number(score));
-        if (infos[key][idx] >= Number(score)) {
+        const idx = binarySearch(infos[key], score);
+        if (infos[key][idx] >= score) {
           temp += infos[key].length - idx;
         }
         // const idx = infos[key].findIndex(x => Number(x) >= Number(score))
@@ -62,6 +65,7 @@ function solution(info, query) {
   return answer;
 }
 
+// 효율성 제일 좋음.
 function solution(info, query) {
 
   const infosMap = new Map();
@@ -69,18 +73,18 @@ function solution(info, query) {
   info.forEach(data => {
     const [lang, field, career, food, score] = data.split(" ");
     const key = lang + field + career + food;
-    infosMap.has(key) ? infosMap.get(key).push(score) : infosMap.set(key, [score]);
+    infosMap.has(key) ? infosMap.get(key).push(parseInt(score)) : infosMap.set(key, [parseInt(score)]);
   })
 
   for (let [key, value] of infosMap) {
-    value.sort((a, b) => a - b).map(Number)
+    value.sort((a, b) => a - b)
   }
 
   const querys = [];
 
   query.forEach(data => {
     const [lang, field, career, food, score] = data.split(/\sand\s|\s/);
-    querys.push({ lang, field, career, food, score })
+    querys.push({ lang, field, career, food, score: parseInt(score) })
   })
 
   const answer = [];
@@ -95,9 +99,9 @@ function solution(info, query) {
         (c3 === '-' || infoKey.includes(c3)) &&
         (c4 === '-' || infoKey.includes(c4))
       ) {
-        const idx = binarySearch(info, Number(score))
+        const idx = binarySearch(info, score)
 
-        if (info[idx] >= Number(score)) {
+        if (info[idx] >= score) {
           temp += info.length - idx;
         }
         // const idx = info.findIndex(x => x >= Number(score))
@@ -120,11 +124,11 @@ function solution(info, query) {
   info.forEach(data => {
     const [lang, field, career, food, score] = data.split(" ");
     const key = lang + field + career + food;
-    infosMap.has(key) ? infosMap.get(key).push(score) : infosMap.set(key, [score]);
+    infosMap.has(key) ? infosMap.get(key).push(Number(score)) : infosMap.set(key, [Number(score)]);
   })
 
   for (let [key, value] of infosMap) {
-    value.sort((a, b) => a - b).map(Number)
+    value.sort((a, b) => a - b)
   }
 
 
@@ -133,14 +137,14 @@ function solution(info, query) {
   query.forEach(data => {
     const [lang, field, career, food, score] = data.split(/\sand\s|\s/);
 
-    querys.push({ lang, field, career, food, score })
+    querys.push({ lang, field, career, food, score: Number(score) })
 
   })
 
   const answer = [];
 
-  // const storage = {};
-  const storage = new Map();
+  const storage = {};
+  // const storage = new Map();
 
   for (let i = 0; i < querys.length; i++) {
     let temp = 0;
@@ -149,9 +153,9 @@ function solution(info, query) {
 
     const str = c1 + c2 + c3 + c4 + score;
 
-    if (/*storage[str] !== undefined*/storage.has(str)) {
-      // answer.push(storage[str]);
-      answer.push(storage.get(str));
+    if (storage[str] !== undefined/*storage.has(str)*/) {
+      answer.push(storage[str]);
+      // answer.push(storage.get(str));
       continue;
     }
 
@@ -162,9 +166,9 @@ function solution(info, query) {
         (c3 === '-' || infoKey.includes(c3)) &&
         (c4 === '-' || infoKey.includes(c4))
       ) {
-        const idx = binarySearch(info, Number(score))
+        const idx = binarySearch(info, score)
 
-        if (info[idx] >= Number(score)) {
+        if (info[idx] >= score) {
           temp += info.length - idx;
         }
         // const idx = info.findIndex(x => parseInt(x) >= parseInt(score))
@@ -173,8 +177,8 @@ function solution(info, query) {
         // }
       }
     }
-    // storage[str] = temp;
-    storage.set(str, temp);
+    storage[str] = temp;
+    // storage.set(str, temp);
     answer.push(temp);
   }
   return answer;
@@ -182,3 +186,54 @@ function solution(info, query) {
 
 
 console.log(solution(["java backend junior pizza 150", "python frontend senior chicken 210", "python frontend senior chicken 150", "cpp backend senior pizza 260", "java backend junior chicken 80", "python backend senior chicken 50"], ["java and backend and junior and pizza 100", "python and frontend and senior and chicken 200", "cpp and - and senior and pizza 250", "- and backend and senior and - 150", "- and - and - and chicken 100", "- and - and - and - 150"]))
+
+
+// function solution(info, query) {
+
+//   // const infos = info.reduce((pre, cur) => {
+//   //   const [lang, field, career, food, score] = cur.split(" ");
+//   //   return [...pre, { lang, field, career, food, score: Number(score) }]
+//   // }, [])
+
+//   const infos = [];
+
+//   info.forEach(data => {
+//     const [lang, field, career, food, score] = data.split(" ");
+//     infos.push({ lang, field, career, food, score: Number(score) })
+//   })
+
+//   // const querys = query.reduce((pre, cur) => {
+//   //   const [lang, field, career, food, score] = cur.split(/\sand\s|\s/);
+//   //   return [...pre, { lang, field, career, food, score: Number(score) }]
+//   // }, [])
+
+//   const querys = [];
+
+//   query.forEach(data => {
+//     const [lang, field, career, food, score] = data.split(/\sand\s|\s/);
+//     querys.push({ lang, field, career, food, score: Number(score) })
+//   })
+
+//   const answer = [];
+
+//   querys.forEach(query => {
+
+//     let temp = 0;
+
+//     const { lang: c1, field: c2, career: c3, food: c4, score } = query;
+
+//     infos.forEach(info => {
+//       if ((c1 === '-' || info.lang === c1) &&
+//         (c2 === '-' || info.field === c2) &&
+//         (c3 === '-' || info.career === c3) &&
+//         (c4 === '-' || info.food === c4) &&
+//         (info.score >= score)
+//       ) {
+//         temp++;
+//       }
+//     })
+//     answer.push(temp);
+//   })
+
+//   return answer;
+// }
