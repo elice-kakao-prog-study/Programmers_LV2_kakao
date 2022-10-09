@@ -68,3 +68,73 @@ function solution(relation) {
   
     return answer.length;
 }
+
+
+/* 처음푼 풀이
+function solution(relation) {
+    const entireIdx = [];
+    const answer = [];
+    const dfsStack = [];
+    const answerSet = new Set();
+    const keyLen = relation[0].length;
+    let targetLen = 2;
+    
+    const dfs = (cnt,target,idx,array,visited)=>{
+        if(cnt === target){
+            
+            const keyArr = relation.map(arr => dfsStack.reduce((tempArr,cur)=>{
+                tempArr.push(arr[cur]);
+                return tempArr;
+            },[]).join(' '));
+
+            const set = new Set(keyArr);
+            
+            if(keyArr.length === set.size){
+                answer.push([...dfsStack]);
+                dfsStack.forEach(idx =>{
+                    answerSet.add(idx);
+                })
+             }
+            return;
+        }
+        
+        for(let i=idx; i<array.length; i++){
+            const curIdx = array[i]
+            if(!visited[i]){
+                visited[i] = true;
+                dfsStack.push(curIdx);
+                dfs(cnt+1,target,i,array,visited);
+                dfsStack.pop();
+                visited[i] = false;
+            }
+        }
+	    }
+    
+    for(let i=0; i<keyLen; i++){
+        entireIdx.push(i);
+        const keyArr = relation.map(arr => arr[i]);
+        const set = new Set(keyArr);
+        if(keyArr.length === set.size){
+            answer.push(i);
+            answerSet.add(i);
+        }
+    }//key len === 1일때 set check.
+    
+    if(answer.length === entireIdx.length) return answer.length;
+    
+    while(true){
+        const filtered = entireIdx.filter(x => !answerSet.has(x));
+        
+        if(targetLen > filtered.length) break;
+        
+        const visited = new Array(filtered.length).fill(false);
+        
+        dfs(0,targetLen,0,filtered,visited);
+        targetLen++;
+    }
+    
+  
+    
+    return answer.length;
+    
+}*/
