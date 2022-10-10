@@ -42,29 +42,6 @@ console.log(solution("ababcdcdababcdcd"))
 // console.log(message.match(reg))
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // function solution(s) {
 //   const strStack = s.split("");
 //   let answer = Number.MAX_SAFE_INTEGER;
