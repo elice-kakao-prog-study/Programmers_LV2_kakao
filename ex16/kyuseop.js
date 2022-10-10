@@ -61,7 +61,9 @@ function solution(queue1, queue2) {
   let n = 0;
   while (true) {
 
-    if (n !== 0 && total1 !== sum && total1 === totalOrigin1 && total2 === totalOrigin2) {
+    if(!Number.isInteger(sum)) return -1;
+    if (n !== 0 && total1 !== total2 && total1 === totalOrigin1 && total2 === totalOrigin2 && 
+        queue1.length === classQueue1.size && queue2.length === classQueue2.size) {
       return -1;
     }
     if (total1 > total2) {
