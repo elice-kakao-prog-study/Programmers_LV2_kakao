@@ -35,37 +35,33 @@ class Queue {
 }
 
 function solution(queue1, queue2) {
-  // const totalOrigin1 = queue1.reduce((pre, cur) => pre + cur);
-  // const totalOrigin2 = queue2.reduce((pre, cur) => pre + cur);
-
+  
   const classQueue1 = new Queue();
   const classQueue2 = new Queue();
 
-  let totalOrigin1 = 0;
-  let totalOrigin2 = 0;
+  let total1 = 0;
+  let total2 = 0;
 
   queue1.forEach(x => {
     classQueue1.enqueue(x);
-    totalOrigin1 += x;
+    total1 += x;
   })
 
   queue2.forEach(x => {
     classQueue2.enqueue(x);
-    totalOrigin2 += x;
+    total2 += x;
   })
 
-  let total1 = totalOrigin1;
-  let total2 = totalOrigin2;
   const sum = (total1 + total2) / 2;
 
   let n = 0;
+  
   while (true) {
-
+      
     if(!Number.isInteger(sum)) return -1;
-    if (n !== 0 && total1 !== total2 && total1 === totalOrigin1 && total2 === totalOrigin2 && 
-        queue1.length === classQueue1.size && queue2.length === classQueue2.size) {
-      return -1;
-    }
+    if(classQueue1.size === 0 || classQueue2.size === 0) return -1;
+    if(n >= 600000) return -1;
+      
     if (total1 > total2) {
       const dequeue = classQueue1.dequeue();
       classQueue2.enqueue(dequeue);
