@@ -1,3 +1,5 @@
+// 정확성 통과
+// 효율성 불합격
 const check = (apply, condition) => {
   const {lang, position, career, food, score} = apply;
   const [langC, positionC, careerC, foodC, scoreC] = condition.split(' ').filter((el) => el !== 'and');
