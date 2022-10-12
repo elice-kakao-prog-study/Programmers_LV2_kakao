@@ -14,32 +14,27 @@ function solution(relation) {
 
   const check = [];
   const temp = [];
+
   function DFS(L, s, m) {
 
     if (L === m) {
-
       for (let i = 0; i < check.length; i++) {
-
         const str = check[i]
         const length = str.length;
         const test = temp.join("")
         let count = 0;
-
         for (let j = 0; j < length; j++) {
           if (test.includes(str[j])) {
             count++;
           }
         }
-
         if (count === length) return;
       }
 
       const arr = [];
 
       for (let i = 0; i < length; i++) {
-
         let sample = '';
-
         for (let j = 0; j < m; j++) {
           sample += checkMap.get(temp[j])[i]
         }
@@ -53,7 +48,6 @@ function solution(relation) {
 
     } else {
       for (let i = s; i < attributes.length; i++) {
-
         temp[L] = attributes[i];
         DFS(L + 1, i + 1, m)
 

@@ -40,9 +40,7 @@ function solution(info, query) {
 
   querys.forEach(query => {
     let temp = 0;
-
     const { lang: c1, field: c2, career: c3, food: c4, score } = query;
-
     Object.keys(infos).forEach(key => {
       if ((c1 === '-' || key.includes(c1)) &&
         (c2 === '-' || key.includes(c2)) &&
@@ -92,7 +90,6 @@ function solution(info, query) {
   querys.forEach(query => {
     let temp = 0;
     const { lang: c1, field: c2, career: c3, food: c4, score } = query;
-
     for (let [infoKey, info] of infosMap) {
       if ((c1 === '-' || infoKey.includes(c1)) &&
         (c2 === '-' || infoKey.includes(c2)) &&
@@ -100,7 +97,6 @@ function solution(info, query) {
         (c4 === '-' || infoKey.includes(c4))
       ) {
         const idx = binarySearch(info, score)
-
         if (info[idx] >= score) {
           temp += info.length - idx;
         }
@@ -131,28 +127,21 @@ function solution(info, query) {
     value.sort((a, b) => a - b)
   }
 
-
   const querys = [];
 
   query.forEach(data => {
     const [lang, field, career, food, score] = data.split(/\sand\s|\s/);
-
     querys.push({ lang, field, career, food, score: Number(score) })
-
   })
 
   const answer = [];
-
   const storage = {};
   // const storage = new Map();
 
   for (let i = 0; i < querys.length; i++) {
     let temp = 0;
-
     const { lang: c1, field: c2, career: c3, food: c4, score } = querys[i];
-
     const str = c1 + c2 + c3 + c4 + score;
-
     if (storage[str] !== undefined/*storage.has(str)*/) {
       answer.push(storage[str]);
       // answer.push(storage.get(str));
@@ -160,14 +149,12 @@ function solution(info, query) {
     }
 
     for (let [infoKey, info] of infosMap) {
-
       if ((c1 === '-' || infoKey.includes(c1)) &&
         (c2 === '-' || infoKey.includes(c2)) &&
         (c3 === '-' || infoKey.includes(c3)) &&
         (c4 === '-' || infoKey.includes(c4))
       ) {
         const idx = binarySearch(info, score)
-
         if (info[idx] >= score) {
           temp += info.length - idx;
         }
