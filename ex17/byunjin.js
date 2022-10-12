@@ -35,6 +35,10 @@ function solution(s) {
         if (isContinue) {
           overlap[overlap.length - 1] = overlap[overlap.length - 1] + 1;
         } else {
+          // 왜냐하면 겹친다는것은 최소 2번 반복이라는 뜻이기 때문에 2를 넣어줍니다
+          // 이게 중요한 이유는 10, 100 이런식으로 숫자자체의 자릿수가 늘어나는 시점 때문입니다.
+          // abcabc = 2abc -> 4
+          // abcabc...abc = 10abc -> 5
           overlap.push(2);
       		isContinue = true;
         }

@@ -19,6 +19,7 @@ function solution(input_string) {
   }
   console.log(idx);
   if (Object.keys(idx).length === 0) return "N";
+
   for (const [key, value] of Object.entries(idx)) {
     for (let i = 0; i < idx[key].length - 1; i++) {
       //console.log(idx[key][i+1],idx[key][i]);

@@ -12,7 +12,7 @@ function solution(relation) {
 
   let answer = 0;
 
-  const check = [];
+  const check = []; // 유일성
   const temp = [];
 
   function DFS(L, s, m) {

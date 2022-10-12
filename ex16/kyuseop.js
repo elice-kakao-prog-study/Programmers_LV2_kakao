@@ -58,7 +58,7 @@ function solution(queue1, queue2) {
   
   while (true) {
       
-    if(!Number.isInteger(sum)) return -1;
+    if(!Number.is(Integersum)) return -1;
     if(classQueue1.size === 0 || classQueue2.size === 0) return -1;
     if(n >= 600000) return -1;
       

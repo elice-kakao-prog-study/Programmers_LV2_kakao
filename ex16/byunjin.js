@@ -33,6 +33,7 @@ function solution(queue1, queue2) {
 
     // 미리 복사해둔 큐 경우의 수를 모두 살피며 원소의 합이 구해야 하는 값과 일치할때 작업 횟수를 리턴 한다
     const maxCount = queue.length;
+
     while (count <= maxCount) {
       if (currentSum < average) insert();
       if (currentSum > average) pop();
